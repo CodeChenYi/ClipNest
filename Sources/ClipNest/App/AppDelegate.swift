@@ -15,6 +15,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         setupClipboardManager()
         setupHotkeyManager()
         checkOnboarding()
+
+        // Start monitoring accessibility permissions early
+        AccessibilityManager.shared.startMonitoring()
+
+        print("ClipNest - Accessibility Status: \(AXIsProcessTrusted())")
     }
 
     private func setupStatusItem() {
@@ -48,6 +53,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.behavior = .transient
         popover.animates = true
         popover.contentViewController = NSHostingController(rootView: ClipboardPopoverView())
+
+        // Set up callback to close popover when requested by ClipboardPopoverState
+        ClipboardPopoverState.shared.onHideRequest = { [weak self] in
+            self?.popover.performClose(nil)
+        }
     }
 
     private func setupClipboardManager() {
@@ -56,6 +66,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func setupHotkeyManager() {
         hotkeyManager = HotkeyManager.shared
+        hotkeyManager.onHotkeyPressed = { [weak self] in
+            self?.showClipboard()
+        }
     }
 
     private func checkOnboarding() {
@@ -66,23 +79,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func statusItemClicked() {
-        if let button = statusItem.button {
-            if popover.isShown {
-                popover.performClose(nil)
-            } else {
-                popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-                popover.contentViewController?.view.window?.makeKey()
-            }
-        }
+        showClipboard()
     }
 
     @objc private func showClipboard() {
-        NSApp.activate(ignoringOtherApps: true)
-        if let button = statusItem.button {
-            if !popover.isShown {
-                popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-                popover.contentViewController?.view.window?.makeKey()
-            }
+        let popoverState = ClipboardPopoverState.shared
+
+        if popover.isShown {
+            popover.performClose(nil)
+            popoverState.hide()
+        } else {
+            popoverState.show()
+            popover.show(relativeTo: statusItem.button!.bounds, of: statusItem.button!, preferredEdge: .minY)
         }
     }
 
@@ -137,6 +145,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillTerminate(_ notification: Notification) {
         hotkeyManager?.unregisterHotkey()
+        ClipboardPopoverState.shared.hide()
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {

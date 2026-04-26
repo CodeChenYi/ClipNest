@@ -1,0 +1,87 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Thumbnails
+._*
+
+# Files that might appear in open directories
+.Trashes
+
+# Xcode
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.xcscmblueprint
+DerivedData/
+*.moved-aside
+*.xcuserstate
+*.xcuserdatamodel
+*.xcuserdatamodelx
+
+# Build
+build/
+*.build/
+*.o
+*.swiftdoc
+*.swiftsourceinfo
+
+# SPM
+Packages/
+Package.resolved
+
+# Packages
+*.tgz
+
+# Swift Package Manager
+.DS_Store
+.swiftpm/
+
+# XcodeGen
+*.xcodeproj
+!*.xcodeproj/project.pbxproj
+
+# IDE
+*.links/
+.vscode/
+.idea/
+*.sublime-*
+
+# Debug
+*.dSYM/
+*.dSYM.zip
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Test
+*.testresult
+*.xcuserdiagnostics
+
+# ClipNest specific
+ClipNest-*.dmg
+*.dmg
+rw.*.dmg
+
+# Temporary files
+*.tmp
+*.temp
+*-gen/

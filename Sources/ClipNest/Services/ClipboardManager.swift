@@ -139,6 +139,17 @@ class ClipboardManager: ObservableObject {
         trimHistory()
         saveHistory()
     }
+
+    func deleteItem(id: UUID) {
+        if let index = history.firstIndex(where: { $0.id == id }) {
+            let item = history[index]
+            if item.type == .image, let imagePath = item.imagePath {
+                storageService.deleteImage(at: imagePath)
+            }
+            history.remove(at: index)
+            saveHistory()
+        }
+    }
 }
 
 import CommonCrypto
