@@ -1,106 +1,74 @@
-# ClipNest
+# ClipNest — 你的 MacOS 智能剪切板伙伴
 
-> A smart clipboard history manager for macOS — built with AI Vibe Coding
+![Platform](https://img.shields.io/badge/platform-macOS%2012.0+-orange)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Made with Vibe Coding](https://img.shields.io/badge/made%20with-Vibe%20Coding-purple)
 
-![Platform](https://img.shields.io/badge/platform-macOS%2012.0+-orange)![License](https://img.shields.io/badge/license-MIT-green)
+> 一个生活在菜单栏里的剪切板历史管家。  
+> 自动记录你复制的一切，快捷键瞬间调取，像 Windows 一样顺手 —— 但更 Mac 味。
 
-## 项目简介
+<p align="center">
+  <img src="https://i.meee.com.tw/ZaqHMiZ.gif" alt="ClipNest 演示" width="600"/>
+</p>
 
-ClipNest 是一款专为 macOS 设计的菜单栏剪切板历史管理工具。它能够自动监控并保存您的剪切板内容，让您随时查看和复用之前的复制记录。
+## 为什么又造一个剪切板工具？
 
-### 核心功能
+因为大部分 macOS 剪切板工具要么太复杂，要么要收费，要么不够“原生”。  
+而这次，我想用 **Vibe Coding** 的方式，把“写一个理想中的小工具”变成一次有趣的探索 —— **让 AI 当我的结对编程搭档，我口述需求，它生成代码，边聊边迭代，把这个工具从想法变成现实。**
 
-- **全局快捷键** — 按 `Option + V` 随时呼出剪切板历史
-- **历史记录** — 自动保存文本和图片，支持永久历史
-- **键盘导航** — 上下键选择条目，回车键快速粘贴
-- **数据持久化** — 重启后自动恢复历史记录
-- **隐私安全** — 所有数据仅本地存储，不上传网络
+如果你也在学习如何与 AI 高效协作开发，这个项目或许能给你一些启发。
 
-## AI Vibe Coding
+---
 
-本项目采用 **AI Vibe Coding** 方式开发 — 利用 AI 助手辅助编程，边对话边开发，快速迭代功能。这种方式让开发者可以专注于产品构思，而将具体实现交给 AI，最终实现「说出需求，立刻可用」的高效开发体验。
+## 🎯 核心功能
 
-## 系统要求
+- **⚡️ 全局快捷键** — 默认 `Option + V`，随时呼出剪切板历史，像 Spotlight 一样快
+- **📋 自动保存历史** — 静默记录文本、图片，重启不掉不丢
+- **🧩 点击即粘贴** — 单击历史条目自动粘贴到当前光标位置，无需再 `Cmd+V`
+- **⌨️ 纯键盘操作** — 上下键选择，回车粘贴，Esc 消失，高效不打断
+- **🔢 可配置条数** — 默认 100 条，可在 20~500 之间调整
+- **🔒 数据 100% 本地** — 所有剪切板内容仅存于你的 Mac，绝不联网
+- **🌙 明暗模式自适应** — 跟随系统外观，无缝融入 macOS
 
-- macOS 12.0 或更高版本
-- 支持 Apple Silicon 和 Intel 芯片
+---
 
-## 安装
+## 🎬 快速预览
 
+### UI界面
 
+![UI界面](https://img.erpweb.eu.org/imgs/2026/04/94a6ffe3ba54db8b.png)
 
-## 权限说明
+### 设置界面
 
-ClipNest 需要以下权限才能正常工作：
+![设置界面](https://img.erpweb.eu.org/imgs/2026/04/e6355e9ef67d7d4b.png)
 
-### 辅助功能权限（必需）
+---
 
-**用途**：实现全局快捷键和自动粘贴功能
+## 💡 关于 Vibe Coding 与这个项目
 
-**授权方式**：
-1. 首次启动引导界面会提示授权
-2. 或前往 **系统设置 → 隐私与安全性 → 辅助功能** 手动添加 ClipNest
+**ClipNest 不是一行行手写的，而是“聊”出来的。**
 
-> 注意：如果重新编译项目并使用新的 ad-hoc 签名，需要重新授予权限。这是因为 macOS 的辅助功能权限基于代码签名，不同签名被视为不同应用。
+整个开发过程遵循 **Vibe Coding** 理念：我负责描述产品形态、交互细节和边界情况，AI 助手（Claude Code）负责生成代码、排查错误、优化逻辑。我们就像真正的一对编程搭档，只不过我的搭档是 AI。
 
-### 屏幕录制权限（自动粘贴功能需要）
+这个过程让我深刻体会到：
 
-**用途**：用于 CGEvent 模拟键盘输入实现自动粘贴
+- **需求表达远比语法重要** —— 能把“想要什么”说清楚，AI 就能实现出 80%
+- **迭代式对话** —— 先搭骨架，再补细节，逐步打磨
 
-**授权方式**：
-1. **系统设置 → 隐私与安全性 → 屏幕录制** 中添加 ClipNest
-2. 或者当弹出提示时选择允许
+如果你对「如何用 AI 开发一个完整的 MacOS 应用」感兴趣，欢迎翻阅提交历史和代码结构，它记录了我们对话的每一步进化。
 
-## 使用方法
+---
 
-### 基本操作
+## 📦 安装
 
-1. **呼出剪切板历史** — 按 `Option + V`
-2. **选择条目** — 使用上下箭头键导航
-3. **粘贴内容** — 按回车键快速粘贴到当前光标位置
-4. **关闭弹窗** — 按 `Escape` 或点击其他地方
+### 手动安装（推荐）
+1. 从 [Releases](https://github.com/CodeChenYi/ClipNest/releases) 页面下载最新的 `.dmg` 压缩包
+2. 后将 `ClipNest.app` 拖入 `Applications` 文件夹
+3. 首次打开时，右键点击应用并选择「打开」以绕过公证（本项目未签名）
 
-### 删除条目
-
-- **鼠标悬停** 在条目上时显示删除按钮，点击删除
-- **右键点击** 条目选择"删除"
-
-### 设置
-
-点击菜单栏图标 → **设置**，可以：
-- 自定义全局快捷键
-- 调整最大保存条数（20-500条）
-- 清空历史记录
-
-## 技术架构
-
-- **语言**：Swift 5.9
-- **UI 框架**：SwiftUI
-- **快捷键**：HotKey SPM
-- **数据存储**：JSON 本地文件
-- **键盘拦截**：CGEvent Tap
-
-## 项目结构
-
-```
-ClipNest/
-├── Sources/ClipNest/
-│   ├── App/
-│   │   └── AppDelegate.swift       # 应用入口、菜单栏管理
-│   ├── Models/
-│   │   ├── ClipboardItem.swift    # 剪切板数据模型
-│   │   └── AppSettings.swift       # 应用设置模型
-│   ├── Services/
-│   │   ├── StorageService.swift    # JSON 存储服务
-│   │   ├── ClipboardManager.swift  # 剪切板监控服务
-│   │   ├── HotkeyManager.swift     # 快捷键管理
-│   │   ├── KeyboardInterceptor.swift # 键盘事件拦截
-│   │   ├── AccessibilityManager.swift # 辅助功能权限管理
-│   │   └── ClipboardPopoverState.swift # 弹窗状态共享
-│   └── Views/
-│       ├── ClipboardPopoverView.swift # 剪切板历史列表
-│       ├── SettingsView.swift      # 设置窗口
-│       └── OnboardingView.swift    # 首次引导界面
-└── Resources/
-    └── Assets.xcassets/           # 应用图标资源
-```
+### 自行编译
+```bash
+git clone https://github.com/yourname/ClipNest.git
+cd ClipNest
+open ClipNest.xcodeproj
+# 选择 Product > Archive 或直接 Run
