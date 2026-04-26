@@ -192,7 +192,7 @@ struct SettingsView: View {
 
             // Footer
             HStack {
-                Text("ClipNest v0.0.1")
+                Text("ClipNest v1.0.0")
                     .font(.system(size: 11))
                     .foregroundColor(.secondary)
 
