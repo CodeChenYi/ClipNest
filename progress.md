@@ -295,3 +295,26 @@
 - 鼠标点击置顶（bug 修复）
 - 鼠标点击粘贴失效（bug 修复）
 - 默认保存条数从 100 改为 50（功能优化）
+
+### 功能优化 - 版本号统一管理
+
+**问题**：版本号硬编码在多处，发布时需要手动更新多个地方。
+
+**解决方案**：
+新增 `AppVersion.swift`，集中管理所有版本相关信息：
+```swift
+enum AppVersion {
+    static let version = "1.1.1"
+    static let buildNumber = "1"
+    static let appName = "ClipNest"
+    static let description = "一个简洁的 macOS 剪切板历史管理工具。"
+}
+```
+
+**修改的文件**：
+- 新增 `Sources/ClipNest/App/AppVersion.swift`
+- 修改 `AppDelegate.swift` 使用 `AppVersion` 枚举
+
+**验证**：
+- ✅ BUILD SUCCEEDED
+- ✅ v1.1.1 DMG 已打包
