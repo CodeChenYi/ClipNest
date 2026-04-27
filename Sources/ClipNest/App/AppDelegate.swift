@@ -114,8 +114,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func showAbout() {
         let alert = NSAlert()
-        alert.messageText = "ClipNest"
-        alert.informativeText = "版本 v1.0.0\n\n一个简洁的 macOS 剪切板历史管理工具。"
+        alert.messageText = AppVersion.appName
+        alert.informativeText = "版本 v\(AppVersion.version)\n\n\(AppVersion.description)"
         alert.alertStyle = .informational
         alert.addButton(withTitle: "好的")
         alert.runModal()
