@@ -47,6 +47,12 @@ class ClipboardPopoverState: ObservableObject {
             }
         }
 
+        interceptor?.onEscape = { [weak self] in
+            DispatchQueue.main.async {
+                self?.handleEscape()
+            }
+        }
+
         interceptor?.install()
     }
 
@@ -80,6 +86,7 @@ class ClipboardPopoverState: ObservableObject {
     private func handleReturn() {
         if let selectedId = selectedItemId,
            let item = ClipboardManager.shared.history.first(where: { $0.id == selectedId }) {
+            ClipboardManager.shared.moveToTop(id: item.id)
             ClipboardManager.shared.copyToClipboard(item)
 
             if AXIsProcessTrusted() {
@@ -98,6 +105,10 @@ class ClipboardPopoverState: ObservableObject {
     }
 
     private func closePopover() {
+        hide()
+    }
+
+    private func handleEscape() {
         hide()
     }
 

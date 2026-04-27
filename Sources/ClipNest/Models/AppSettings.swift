@@ -10,7 +10,7 @@ struct AppSettings: Codable {
     static let `default` = AppSettings(
         hotkeyKeyCode: UInt32(kVK_ANSI_V),
         hotkeyModifiers: UInt32(optionKey << 16),
-        maxHistoryCount: 100,
+        maxHistoryCount: 50,
         hasCompletedOnboarding: false
     )
 

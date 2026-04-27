@@ -9,6 +9,7 @@ class KeyboardInterceptor: ObservableObject {
     var onUpArrow: (() -> Void)?
     var onDownArrow: (() -> Void)?
     var onReturn: (() -> Void)?
+    var onEscape: (() -> Void)?
 
     private var eventTap: CFMachPort?
     private var runLoopSource: CFRunLoopSource?
@@ -45,7 +46,8 @@ class KeyboardInterceptor: ObservableObject {
                     // Check if this is one of our intercepted keys
                     if keyCode == Int64(kVK_UpArrow) ||
                        keyCode == Int64(kVK_DownArrow) ||
-                       keyCode == Int64(kVK_Return) {
+                       keyCode == Int64(kVK_Return) ||
+                       keyCode == Int64(kVK_Escape) {
 
                         // Invoke the callback on the main thread
                         DispatchQueue.main.async {
@@ -56,6 +58,8 @@ class KeyboardInterceptor: ObservableObject {
                                 interceptor.onDownArrow?()
                             case Int64(kVK_Return):
                                 interceptor.onReturn?()
+                            case Int64(kVK_Escape):
+                                interceptor.onEscape?()
                             default:
                                 break
                             }

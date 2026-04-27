@@ -150,6 +150,13 @@ class ClipboardManager: ObservableObject {
             saveHistory()
         }
     }
+
+    func moveToTop(id: UUID) {
+        guard let index = history.firstIndex(where: { $0.id == id }) else { return }
+        let item = history.remove(at: index)
+        history.insert(item, at: 0)
+        saveHistory()
+    }
 }
 
 import CommonCrypto

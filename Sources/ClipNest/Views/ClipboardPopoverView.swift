@@ -140,13 +140,14 @@ struct ClipboardPopoverView: View {
     }
 
     private func handleItemTap(_ item: ClipboardItem) {
+        ClipboardManager.shared.moveToTop(id: item.id)
         ClipboardManager.shared.copyToClipboard(item)
 
         popoverState.hide()
 
         if AXIsProcessTrusted() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                simulatePaste()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                self.simulatePaste()
             }
         }
     }

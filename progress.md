@@ -201,3 +201,97 @@
 
 **验证**：
 - ✅ BUILD SUCCEEDED
+
+## 2026-04-27
+
+### 功能测试完成
+- 剪切板监控正常
+- 全局快捷键 Option+V 工作正常
+- 键盘上下键导航正常
+- 回车键快速粘贴正常
+- 数据持久化正常
+- 快捷键自定义正常
+- 最大记录数调整正常
+- 清空历史正常
+- 引导流程正常
+
+### GitHub 提交完成
+- 所有功能验证通过
+- 代码已提交到 GitHub
+- v1.0.0 发布就绪
+
+### 项目状态
+- ✅ 所有阶段完成
+- ✅ v1.0.0 正式版发布
+
+## 2026-04-27 (续)
+
+### 新功能 - Esc 键隐藏剪切板历史 UI
+
+**实现方式**：
+1. 在 `KeyboardInterceptor` 添加 `onEscape` 回调
+2. 在键盘拦截中监听 `kVK_Escape` 键
+3. 在 `ClipboardPopoverState` 添加 `handleEscape()` 方法，调用 `hide()` 关闭弹窗
+
+**修改的文件**：
+- `KeyboardInterceptor.swift` - 添加 `onEscape` 回调，监听 Esc 键
+- `ClipboardPopoverState.swift` - 添加 `handleEscape()` 方法
+
+**验证**：
+- ✅ BUILD SUCCEEDED
+
+### 新功能 - 回车粘贴时内容置顶
+
+**需求**：回车选择粘贴一个内容时，当前内容直接置顶到第一条。
+
+**实现方式**：
+1. 在 `ClipboardManager` 添加 `moveToTop(id: UUID)` 方法，将指定条目移到数组首位
+2. 在 `handleReturn()` 中，复制内容前先调用 `moveToTop()` 将内容置顶
+
+**修改的文件**：
+- `ClipboardManager.swift` - 添加 `moveToTop()` 方法
+- `ClipboardPopoverState.swift` - 修改 `handleReturn()` 调用置顶
+
+**验证**：
+- ✅ BUILD SUCCEEDED
+
+### v1.1.0 更新内容
+- Esc 键隐藏剪切板历史 UI
+- 回车粘贴时内容置顶到第一条
+
+### Bug 修复 - 鼠标点击复制后不置顶
+
+**问题**：鼠标点击复制内容后，历史记录没有置顶，导致顺序不一致。
+
+**根本原因**：`ClipboardPopoverView.handleItemTap()` 只调用了 `copyToClipboard()`，没有像键盘回车那样调用 `moveToTop()`。
+
+**解决方案**：
+在 `handleItemTap()` 中，复制前先调用 `moveToTop()` 使行为与键盘回车一致。
+
+**修改的文件**：
+- `ClipboardPopoverView.swift` - 修改 `handleItemTap()` 添加置顶逻辑
+
+**验证**：
+- ✅ BUILD SUCCEEDED
+
+### Bug 修复 - 鼠标点击粘贴失效
+
+**问题**：鼠标点击复制内容后，其他应用程序失去焦点，焦点跑到历史记录 UI 上，导致没有光标输入，从而不会粘贴。
+
+**根本原因**：NSPopover 关闭时焦点丢失到错误的位置。
+
+**解决方案**：
+增加 `simulatePaste()` 的延迟时间，从 0.15 秒改为 0.25 秒，给弹窗足够时间关闭并恢复焦点。
+
+**修改的文件**：
+- `ClipboardPopoverView.swift` - `handleItemTap()` 中延迟从 0.15s 改为 0.25s
+
+**验证**：
+- ✅ BUILD SUCCEEDED
+
+### v1.1.0 更新内容
+- Esc 键隐藏剪切板历史 UI
+- 回车粘贴时内容置顶到第一条
+- 鼠标点击置顶（bug 修复）
+- 鼠标点击粘贴失效（bug 修复）
+- 默认保存条数从 100 改为 50（功能优化）
